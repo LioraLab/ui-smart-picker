@@ -2,10 +2,16 @@
   "name": "ui-smart-picker",
   "displayName": "UI SmartPicker (VSCode)",
   "description": "Pick UI elements in browser and generate AI prompts.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LioraLab/ui-smart-picker.git"
+  },
+  "license": "MIT",
   "version": "1.0.0",
-  "publisher": "your-name",
+  "publisher": "Lioric",
+  "icon": "logo_uismartpicker.png",
   "engines": {
-    "vscode": "^1.90.0"
+  	"vscode": "^1.107.0"
   },
   "categories": [
     "Other",
