@@ -1,0 +1,55 @@
+{
+  "name": "ui-smart-picker",
+  "displayName": "UI SmartPicker (VSCode)",
+  "description": "Pick UI elements in browser and generate AI prompts.",
+  "version": "1.0.0",
+  "publisher": "your-name",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "categories": [
+    "Other",
+    "AI",
+    "Visualization"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "title": "UI SmartPicker",
+      "properties": {
+        "uiSmartPicker.port": {
+          "type": "number",
+          "default": 54321,
+          "description": "Port number for the UI Picker server."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "uiSmartPicker.restart",
+        "title": "UI SmartPicker: Restart Server"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.107.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "typescript-eslint": "^8.48.1",
+    "eslint": "^9.39.1",
+    "typescript": "^5.9.3",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2"
+  }
+}

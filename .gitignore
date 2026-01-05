@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Testing
+coverage/
+.vscode-test/
+
+# Production
+out/
+dist/
+build/
+
+# Misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# Editor/IDE Settings
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json
+!.vscode/settings.json
+.idea/
+.gemini/
+
+# Extension specific
+*.vsix
+.vscode/captures/
+
+# Chrome Extension specific
+chrome-extension/*.pem
+chrome-extension/*.crx

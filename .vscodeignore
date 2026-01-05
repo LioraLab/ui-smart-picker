@@ -1,0 +1,13 @@
+.vscode/**
+.vscode-test/**
+out/test/**
+src/**
+.gitignore
+.vscodeignore
+vsc-extension-quickstart.md
+chrome-extension/**
+eslint.config.mjs
+tsconfig.json
+GEMINI.md
+*.vsix
+node_modules/**
