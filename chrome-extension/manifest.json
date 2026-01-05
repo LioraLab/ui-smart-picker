@@ -3,6 +3,9 @@
   "name": "UI SmartPicker (Browser)",
   "version": "1.0",
   "description": "Pick UI elements and send to VSCode.",
+  "icons": {
+    "128": "logo_uismartpicker.png"
+  },
   "permissions": ["activeTab", "scripting", "storage"],
   "host_permissions": ["<all_urls>"],
   "options_ui": {
@@ -10,6 +13,7 @@
     "open_in_tab": false
   },
   "action": {
+    "default_icon": "logo_uismartpicker.png",
     "default_title": "Pick Element"
   },
   "background": {
