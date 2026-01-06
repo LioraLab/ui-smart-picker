@@ -6,12 +6,25 @@ import { TextDecoder } from 'util';
 
 let server: http.Server | undefined;
 let statusBarItem: vscode.StatusBarItem;
+let isServerRunning = false;
 
 export function activate(context: vscode.ExtensionContext) {
     statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
     context.subscriptions.push(statusBarItem);
 
-    startServer();
+    // 초기 상태: OFF
+    updateStatusBar();
+    statusBarItem.show();
+
+    context.subscriptions.push(vscode.commands.registerCommand('uiSmartPicker.start', () => {
+        startServer();
+        vscode.window.showInformationMessage('UI Picker Server Started');
+    }));
+
+    context.subscriptions.push(vscode.commands.registerCommand('uiSmartPicker.stop', () => {
+        stopServer();
+        vscode.window.showInformationMessage('UI Picker Server Stopped');
+    }));
 
     context.subscriptions.push(vscode.commands.registerCommand('uiSmartPicker.restart', () => {
         startServer();
@@ -19,18 +32,41 @@ export function activate(context: vscode.ExtensionContext) {
     }));
 
     context.subscriptions.push(vscode.workspace.onDidChangeConfiguration(e => {
-        if (e.affectsConfiguration('uiSmartPicker.port')) {
+        if (e.affectsConfiguration('uiSmartPicker.port') && isServerRunning) {
             startServer();
         }
     }));
 }
 
 export function deactivate() {
-    if (server) { server.close(); }
+    stopServer();
+}
+
+function updateStatusBar() {
+    if (isServerRunning) {
+        const config = vscode.workspace.getConfiguration('uiSmartPicker');
+        const PORT = config.get<number>('port') || 54321;
+        statusBarItem.text = `$(radio-tower) UI SmartPicker: ${PORT}`;
+        statusBarItem.command = 'uiSmartPicker.stop';
+        statusBarItem.tooltip = 'Click to Stop UI SmartPicker Server';
+    } else {
+        statusBarItem.text = `$(circle-slash) UI SmartPicker: OFF`;
+        statusBarItem.command = 'uiSmartPicker.start';
+        statusBarItem.tooltip = 'Click to Start UI SmartPicker Server';
+    }
+}
+
+function stopServer() {
+    if (server) { 
+        server.close(); 
+        server = undefined;
+    }
+    isServerRunning = false;
+    updateStatusBar();
 }
 
 function startServer() {
-    if (server) { server.close(); }
+    stopServer(); // 기존 서버 종료
     const config = vscode.workspace.getConfiguration('uiSmartPicker');
     const PORT = config.get<number>('port') || 54321;
 
@@ -58,8 +94,8 @@ function startServer() {
     });
 
     server.listen(PORT, '0.0.0.0', () => {
-        statusBarItem.text = `$(radio-tower) Picker: ${PORT}`;
-        statusBarItem.show();
+        isServerRunning = true;
+        updateStatusBar();
     });
 }
 

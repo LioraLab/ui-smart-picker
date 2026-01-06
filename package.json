@@ -7,7 +7,7 @@
     "url": "https://github.com/LioraLab/ui-smart-picker.git"
   },
   "license": "MIT",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "publisher": "Lioric",
   "icon": "logo_uismartpicker.png",
   "engines": {
@@ -34,6 +34,14 @@
       }
     },
     "commands": [
+      {
+        "command": "uiSmartPicker.start",
+        "title": "UI SmartPicker: Start Server"
+      },
+      {
+        "command": "uiSmartPicker.stop",
+        "title": "UI SmartPicker: Stop Server"
+      },
       {
         "command": "uiSmartPicker.restart",
         "title": "UI SmartPicker: Restart Server"
