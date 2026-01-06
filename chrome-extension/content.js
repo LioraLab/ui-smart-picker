@@ -140,15 +140,16 @@
             setTimeout(() => el.classList.remove('ui-picker-clicked'), 500);
 
             // 4. 전송 (포트 설정 가져오기)
-            chrome.storage.sync.get({ port: 54321 }, (items) => {
+            chrome.storage.sync.get({ host: '172.28.87.39', port: 54321 }, (items) => {
                 // 콜백 시점에서도 컨텍스트 유효성 다시 체크
                 if (!isContextValid()) {
                     showToast("연결이 끊어졌습니다. 새로고침이 필요합니다.", true);
                     return;
                 }
                 
+                const HOST = items.host;
                 const PORT = items.port;
-                fetch(`http://localhost:${PORT}/pick`, {
+                fetch(`http://${HOST}:${PORT}/pick`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
